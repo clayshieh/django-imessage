@@ -1,4 +1,5 @@
-env/*
-sms/db
-*.pyc
-*.swp
+.Python
+bin/
+include/
+lib/
+pip-selfcheck.json
