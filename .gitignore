@@ -3,3 +3,9 @@ bin/
 include/
 lib/
 pip-selfcheck.json
+
+sms/db/
+sms/core/settings.py
+
+*.pyc
+
