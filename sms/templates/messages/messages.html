@@ -3,8 +3,8 @@
 {% block scripts %}
   <script>
       function chooseFilter() {
-          var input_el = new Date(document.getElementById("filter_date").value).getTime();
-          window.location.replace("/messages/{{ handle.rowid }}/" + input_el);
+          var input_el = document.getElementById("filter_date").value;
+          window.location.replace("/messages/{{ handle.rowid }}/?filter=" + input_el);
       }
   </script>
 {% endblock %}
@@ -23,8 +23,7 @@
   </div>
 
   <div>
-  {% for message in handle.message_set.all %}
-
+  {% for message in messages %}
     {% if message.is_from_me %}
     <div class="bubble right">
       {% if message.handle.service == "iMessage" %}
