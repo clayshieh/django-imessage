@@ -4,11 +4,46 @@
     <meta charset="UTF-8">
     <title>Django-iMessages</title>
 </head>
+<style>
+    body {
+      font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+</style>
 <body>
+    <h1>
+        Welcome to Django iMessages
+    </h1>
+    <br>
+    <h2>Usage</h2>
+    <h4>Index</h4>
+    <p>
+        The index page lists all conversations found in the database SMS and iMessage alike. Click on the phone number/handle
+        that you wish to view the conversations for.
+    </p>
+    <p>
+        To see all conversations in the database go here: <a href="/messages"> HERE </a>
+    </p>
+    <h4>Messages</h4>
+    <p>
+        The messages page shows you the current conversation you are looking at in a Messages style format. All messages
+        are loaded if not filtered so large conversations may cause the browser to lag when looking at said conversation.
+    </p>
+    <p>
+        The messages page also supports filtering by date via a date input UI or a GET query parameter. For the date
+        input UI, simply go to the top right of the message and select the date of the current conversation you wish
+        to view and press 'Go'. Because large conversations may take a while for the browser to load, you can also filter
+        by date via a GET query parameter by adding a query string to the end of the url of the conversation.
+    </p>
+    <p>
+        For example,
+    </p>
+    <p>
+        if you are looking at a conversation with a handle_id of 1 then your URL would be: https://localhost:8000/messages/1/
+    </p>
+    <p>
+        and if you want to filter by the date Jan. 1, 2000 then you would navigate to: https://localhost:8000/messages/1/?filter=2000-1-1.
+    </p>
 
-<div>
-    Show all conversations: <a href="/messages"> HERE </a>
-</div>
 
 </body>
 </html>
