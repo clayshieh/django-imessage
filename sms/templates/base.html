@@ -4,9 +4,9 @@
 <html>
   <head>
     <title>{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" href="{% static "UiUIKit/stylesheets/iphone.css" %}">
+    <link rel="stylesheet" href="{% static 'UiUIKit/stylesheets/iphone.css' %}">
   </head>
-
+  {% block scripts %}{% endblock %}
   <body id="{% block body_id %}{% endblock %}">
     {%block content %}{% endblock %}
   </body>
