@@ -36,9 +36,23 @@ def messages(request, handle_id):
     else:
         messages = handle.message_set.all()
 
+    datestamps = []
+    last = None
+    if messages:
+        last = messages[0].date
+        datestamps.append(1)
+        for n, message in enumerate(messages):
+            message_date = message.date
+            if message_date.month != last.month or message_date.day != last.day or message_date.year != last.year:
+                datestamps.append(n+1)
+                last = message.date
+
+    print datestamps
+
     context = {
         "handle": handle,
         "messages": messages,
+        "datestamps": datestamps
     }
 
     return render(request, "messages/messages.html", context)

@@ -6,6 +6,9 @@
           var input_el = document.getElementById("filter_date").value;
           window.location.replace("/messages/{{ handle.rowid }}/?filter=" + input_el);
       }
+      function jumpToDay(day) {
+          alert(day);
+      }
   </script>
 {% endblock %}
 
@@ -29,6 +32,13 @@
 
   <blockquote class="chat">
     {% for message in messages %}
+
+    {% if forloop.counter in datestamps %}
+      <p class="dateStamp">
+        {{message.date}}
+      </p>
+    {% endif %}
+
     {% if message.is_from_me %}
       {% if message.handle.service == "iMessage" %}
         <p class="meBlue">

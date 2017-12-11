@@ -8,7 +8,7 @@ blockquote {
   margin: 0 auto;
   max-width: 95vw;
 }
-p:not(.timestamp) {
+p {
   margin: 0 0 0.5em;
   border-radius: 1em;
   padding: 0.5em 1em;
@@ -17,10 +17,17 @@ p:not(.timestamp) {
   clear: both;
   position: relative;
 }
+p.dateStamp {
+  margin: 0 auto;
+  width: 50%;
+  background: none;
+  clear: both;
+  position: relative;
+  font-size: 14px;
+  text-align: center;
+}
 p.timestampThem {
   margin: 0 0 0.5em;
-  border-radius: 1em;
-  padding: 0.5em 1em;
   background: none;
   max-width: 75%;
   clear: both;
@@ -30,8 +37,6 @@ p.timestampThem {
 }
 p.timestampMe {
   margin: 0 0 0.5em;
-  border-radius: 1em;
-  padding: 0.5em 1em;
   background: none;
   max-width: 75%;
   clear: both;
