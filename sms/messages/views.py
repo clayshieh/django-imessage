@@ -1,6 +1,5 @@
 from django.conf import settings
-from django.shortcuts import render, render_to_response
-from django.template import RequestContext
+from django.shortcuts import render
 
 from messages.models import Message, Handle
 
@@ -8,17 +7,16 @@ from datetime import datetime, timedelta
 from pytz import timezone
 
 
-def index(request, template_name="messages/index.html"):
+def index(request):
 
     context = {
         "handles": Handle.objects.all()
     }
 
-    return render_to_response(template_name,
-            RequestContext(request, context))
+    return render(request, "messages/index.html", context)
 
 
-def messages(request, handle_id, template_name="messages/messages.html"):
+def messages(request, handle_id):
 
     handle = Handle.objects.get(pk=handle_id)
 
@@ -43,5 +41,5 @@ def messages(request, handle_id, template_name="messages/messages.html"):
         "messages": messages,
     }
 
-    return render(request, template_name, context)
+    return render(request, "messages/messages.html", context)
 
