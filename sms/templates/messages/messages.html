@@ -13,38 +13,44 @@
 
 {% block content %}
   <div id="header">
-    <h1>Messages from {{ handle.id }}</h1>
-    <a href="/messages" id="backButton">Back</a>
+    <div>
+      <h1>Messages from {{ handle.id }}</h1>
+    </div>
+    <div>
+      <a href="/messages" id="backButton" style="max-width: 200px; float: left">Back</a>
+    </div>
     <div id="filter" style="float: right">
       <label for="filter_date">Show messages on day:</label>
       <input id="filter_date" type="date">
       <button onclick="chooseFilter()">Go</button>
     </div>
   </div>
+  <hr>
 
-  <div>
-  {% for message in messages %}
+  <blockquote class="chat">
+    {% for message in messages %}
     {% if message.is_from_me %}
-    <div class="bubble right">
       {% if message.handle.service == "iMessage" %}
-        <p class="aqua">
+        <p class="meBlue">
       {% else %}
-        <p class="lime">
+        <p class="meGreen">
       {% endif %}
-      {{ message.text }}
+          {{ message.text }}
         </p>
-    </div>
     {% else %}
-    <div class="bubble left">
-      <p class="clear">{{ message.text }}</p>
-    </div>
+      <p class="them">
+        {{ message.text }}
+      </p>
     {% endif %}
-    <p>
-      {{ message.date }}
-    </p>
-
-  {% endfor %}
-  </div>
+    {% if message.is_from_me %}
+      <p class="timestampMe">
+    {% else %}
+      <p class="timestampThem">
+    {% endif %}
+        {{ message.date }}
+      </p>
+    {% endfor %}
+  </blockquote>
 
 
 {% endblock %}

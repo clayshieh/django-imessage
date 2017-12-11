@@ -1,0 +1,146 @@
+/*taken from codepen by Captain Anonymous here: https://codepen.io/anon/pen/qdyEPL and modified*/
+
+body {
+      background: white;
+      font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+blockquote {
+  margin: 0 auto;
+  max-width: 95vw;
+}
+p:not(.timestamp) {
+  margin: 0 0 0.5em;
+  border-radius: 1em;
+  padding: 0.5em 1em;
+  background: #e5e5ea;
+  max-width: 75%;
+  clear: both;
+  position: relative;
+}
+p.timestampThem {
+  margin: 0 0 0.5em;
+  border-radius: 1em;
+  padding: 0.5em 1em;
+  background: none;
+  max-width: 75%;
+  clear: both;
+  position: relative;
+  float: left;
+  font-size: 10px;
+}
+p.timestampMe {
+  margin: 0 0 0.5em;
+  border-radius: 1em;
+  padding: 0.5em 1em;
+  background: none;
+  max-width: 75%;
+  clear: both;
+  position: relative;
+  float: right;
+  font-size: 10px;
+}
+p.them {
+  float: left;
+}
+p.them::after {
+  content: "";
+  position: absolute;
+  left: -0.5em;
+  bottom: 0;
+  width: 0.5em;
+  height: 1em;
+  border-right: 0.5em solid #e5e5ea;
+  border-bottom-right-radius: 1em 0.5em;
+}
+p.meBlue {
+  float: right;
+  background-color: #1289fe;
+  color: white;
+}
+p.meBlue::after {
+  content: "";
+  position: absolute;
+  right: -0.5em;
+  bottom: 0;
+  width: 0.5em;
+  height: 1em;
+  border-left: 0.5em solid #1289fe;
+  border-bottom-left-radius: 1em 0.5em;
+}
+p.meGreen {
+  float: right;
+  background-color: #65D85E;
+  color: white;
+}
+p.meGreen::after {
+  content: "";
+  position: absolute;
+  right: -0.5em;
+  bottom: 0;
+  width: 0.5em;
+  height: 1em;
+  border-left: 0.5em solid #65D85E;
+  border-bottom-left-radius: 1em 0.5em;
+}
+
+/*taken from github gist by joesteinkamp here: https://gist.github.com/joesteinkamp/3396230 and modified*/
+ul {
+    list-style-type: none;
+    padding: 0;
+    background: #fff;
+}
+a {
+    display: block;
+    padding: 9px 10px 5px 10px;
+    border-bottom: 1px solid #E7E7E7;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    color: #000;
+}
+a:hover, a:active {
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#058cf5), color-stop(100%,#015ee6));
+    background: -webkit-linear-gradient(top, #058cf5 0%,#015ee6 100%);
+    background: linear-gradient(top, #058cf5 0%,#015ee6 100%);
+    color: #fff;
+}
+a:after {
+    content: "〉";
+    float: right;
+    font-weight: bold;
+    color: #808080;
+    font-size: 13px;
+    text-shadow: 1px 0 1px #808080;
+}
+    a:hover:after, a:hover:after {
+        color: #fff;
+        text-shadow: 1px 0 1px #fff;
+    }
+a#backButton:after {
+    content: "〉";
+    float: left;
+    font-weight: bold;
+    color: #808080;
+    font-size: 13px;
+    text-shadow: 1px 0 1px #808080;
+}
+    a:hover:after, a:hover:after {
+        color: #fff;
+        text-shadow: 1px 0 1px #fff;
+    }
+
+/*custom*/
+#header {
+  overflow: auto;
+}
+#filter {
+  padding-top: 9px;
+}
+label {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #000;
+}
