@@ -4,22 +4,10 @@
     <meta charset="UTF-8">
     <title>Django-iMessages</title>
 </head>
-<script>
-    function chooseFilter() {
-        var input_el = new Date(document.getElementById("filter_date").value).getTime();
-        window.location.replace("messages/date/" + input_el);
-    }
-</script>
 <body>
 
 <div>
     Show all conversations: <a href="/messages"> HERE </a>
-</div>
-
-<div>
-    <label for="filter_date">Show messages on day:</label>
-    <input id="filter_date" type="date">
-    <button onclick="chooseFilter()">Go</button>
 </div>
 
 </body>
