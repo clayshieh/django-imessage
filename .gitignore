@@ -4,7 +4,7 @@ include/
 lib/
 pip-selfcheck.json
 
-sms/db/
+sms/db/*.db
 
 *.pyc
 
