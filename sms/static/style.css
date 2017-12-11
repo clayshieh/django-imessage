@@ -27,7 +27,6 @@ p.dateStamp {
   text-align: center;
 }
 p.timestampThem {
-  margin: 0 0 0.5em;
   background: none;
   max-width: 75%;
   clear: both;
@@ -36,7 +35,6 @@ p.timestampThem {
   font-size: 10px;
 }
 p.timestampMe {
-  margin: 0 0 0.5em;
   background: none;
   max-width: 75%;
   clear: both;
@@ -94,7 +92,7 @@ ul {
     padding: 0;
     background: #fff;
 }
-a {
+a.chat {
     display: block;
     padding: 9px 10px 5px 10px;
     border-bottom: 1px solid #E7E7E7;
@@ -106,13 +104,13 @@ a {
     font-weight: bold;
     color: #000;
 }
-a:hover, a:active {
+a.chat:hover, a.chat:active {
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#058cf5), color-stop(100%,#015ee6));
     background: -webkit-linear-gradient(top, #058cf5 0%,#015ee6 100%);
     background: linear-gradient(top, #058cf5 0%,#015ee6 100%);
     color: #fff;
 }
-a:after {
+a.chat:after {
     content: "〉";
     float: right;
     font-weight: bold;
@@ -132,10 +130,10 @@ a#backButton:after {
     font-size: 13px;
     text-shadow: 1px 0 1px #808080;
 }
-    a:hover:after, a:hover:after {
-        color: #fff;
-        text-shadow: 1px 0 1px #fff;
-    }
+a:hover:after, a:hover:after {
+    color: #fff;
+    text-shadow: 1px 0 1px #fff;
+}
 
 /*custom*/
 #header {

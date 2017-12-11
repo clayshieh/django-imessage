@@ -47,8 +47,6 @@ def messages(request, handle_id):
                 datestamps.append(n+1)
                 last = message.date
 
-    print datestamps
-
     context = {
         "handle": handle,
         "messages": messages,
