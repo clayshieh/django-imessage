@@ -26,27 +26,30 @@ def messages(request, handle_id):
     search_terms_cleaned = []
 
     if "filter" in request.GET:
-        app_tz = timezone(settings.TIME_ZONE)
-        start_date = datetime.strptime(request.GET["filter"], "%Y-%m-%d").replace(tzinfo=app_tz)
-        end_date = start_date + timedelta(days=1)
+        if request.GET["filter"]:
+            app_tz = timezone(settings.TIME_ZONE)
+            start_date = datetime.strptime(request.GET["filter"], "%Y-%m-%d").replace(tzinfo=app_tz)
+            end_date = start_date + timedelta(days=1)
 
-    elif "search" in request.GET:
-        query = request.GET["search"].upper()
-        if query:
-            search_terms = []
-            if " OR " in query:
-                for q in query.split(" OR "):
-                    search_terms.append([q.strip()])
-            else:
-                search_terms.append([query])
-            for search_term in search_terms:
-                tmp = []
-                if " AND " in search_term[0]:
-                    for x in search_term[0].split(" AND "):
-                        tmp.append(x.strip())
+    if "search" in request.GET:
+        print request.GET["search"]
+        if request.GET["search"]:
+            query = request.GET["search"].upper()
+            if query:
+                search_terms = []
+                if " OR " in query:
+                    for q in query.split(" OR "):
+                        search_terms.append([q.strip()])
                 else:
-                    tmp = search_term
-                search_terms_cleaned.append(tmp)
+                    search_terms.append([query])
+                for search_term in search_terms:
+                    tmp = []
+                    if " AND " in search_term[0]:
+                        for x in search_term[0].split(" AND "):
+                            tmp.append(x.strip())
+                    else:
+                        tmp = search_term
+                    search_terms_cleaned.append(tmp)
 
     messages = handle.message_set.all()
 

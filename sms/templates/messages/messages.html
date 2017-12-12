@@ -2,9 +2,10 @@
 {% block title %}Messages from {{ handle.id }}{% endblock %}
 {% block scripts %}
   <script>
-      function chooseFilter() {
-          var input_el = document.getElementById("filter_date").value;
-          window.location.replace("/messages/{{ handle.rowid }}/?filter=" + input_el);
+      function filterQuery() {
+          var date_input = document.getElementById("filter_date").value;
+          var search_input = document.getElementById("filter_search").value;
+          window.location.replace("/messages/{{ handle.rowid }}/?filter=" + date_input + "&search=" + encodeURI(search_input));
       }
       function jumpToDay(day) {
           alert(day);
@@ -25,7 +26,9 @@
     <div id="filter" style="float: right">
       <label for="filter_date">Show messages on day:</label>
       <input id="filter_date" type="date">
-      <button onclick="chooseFilter()">Go</button>
+      <label for="filter_search">and/or search:</label>
+      <input id="filter_search">
+      <button onclick="filterQuery()">Go</button>
     </div>
   </div>
   <hr>
