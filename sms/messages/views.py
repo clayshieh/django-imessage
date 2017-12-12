@@ -117,7 +117,7 @@ def messages(request, handle_id):
             filtered_messages = messages
 
         # process datestamps
-        last = messages[0].date
+        last = filtered_messages[0].date
         datestamps.append(1)
         for n, message in enumerate(filtered_messages):
             message_date = message.date
