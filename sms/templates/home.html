@@ -27,9 +27,10 @@
         The messages page shows you the current conversation you are looking at in a Messages style format. All messages
         are loaded if not filtered so large conversations may cause the browser to lag when looking at said conversation.
     </p>
+    <u>Filter by Date</u>
     <p>
-        The messages page also supports filtering by date via a date input UI or a GET query parameter. For the date
-        input UI, simply go to the top right of the message and select the date of the current conversation you wish
+        The messages page supports filtering by date via a date input UI or a GET query parameter. For the date
+        input UI, simply go to the top right of the message page and select the date of the current conversation you wish
         to view and press 'Go'. Because large conversations may take a while for the browser to load, you can also filter
         by date via a GET query parameter by adding a query string to the end of the url of the conversation.
     </p>
@@ -42,6 +43,49 @@
     <p>
         and if you want to filter by the date Jan. 1, 2000 then you would navigate to: https://localhost:8000/messages/1/?filter=2000-1-1.
     </p>
+    <u>Filter by Search Query</u>
+    <p>
+       The messages page supports filtering by search query terms via a simple text box or a GET query parameter. For
+        the search input UI, similar to the date UI, go to the top right of the message page and type in the search query
+        you wish to search for and press 'Go'. Because large conversations may take a while for the browser to load, you can also filter
+        by search query via a GET query parameter by adding a query string to the end of the url of the conversation.
+    </p>
+    <p>
+        Currently search only supports the two operators: AND and OR.
+    </p>
+    <p>
+        For example,
+    </p>
+    <p>
+        if you are looking at a conversation with a handle_id of 1 with the following scenarios:
+    </p>
+    <p>
+        1. A single term "term1" you would navigate to:
+    </p>
+    <p>
+        https://localhost:8000/messages/1/?search=term1
+    </p>
+    <p>
+        2. One term or the other "term1" or "term2" you would navigate to:
+    </p>
+    <p>
+        https://localhost:8000/messages/1/?search=term1%20OR%20term2
+    </p>
+    <p>
+        3. One term and the other "term1" and "term2" you would navigate to:
+    </p>
+    <p>
+        https://localhost:8000/messages/1/?search=term1%20AND%20term2
+    </p>
+    <p>
+        Note:
+    </p>
+    <ul>
+        <li>Search terms AND and OR can be combined</li>
+        <li>OR is the "highest" level meaning x OR y AND z is interpreted as x OR (y AND z)</li>
+        <li>Case does not matter in search terms</li>
+        <li>Search and date can be combined</li>
+    </ul>
     <h2>Trouble Shooting</h2>
     <ul>
         <li>Did you drag the db file to /sms/db/ and rename it to sms.db?</li>
