@@ -5,6 +5,8 @@ lib/
 pip-selfcheck.json
 
 sms/db/*.db
+*.db-shm
+*.db-wal
 
 *.pyc
 

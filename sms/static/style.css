@@ -147,3 +147,8 @@ label {
     font-size: 14px;
     color: #000;
 }
+img {
+    max-width: 40vw;
+    max-height: 40vh;
+    float: right;
+}
