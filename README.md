@@ -8,7 +8,7 @@ What?
 -----
 iOS and OSX store all your SMS/Messages in a sqlite database. This gets downloaded to your computer each time you backup/sync your phone via iTunes.
 
-This is a django app which allows you to drop your SMS database into it, fire it up and have all your messages in a nice browseable web app.
+This is a django app which allows you to drop your SMS database into it, fire it up and have all your messages in a nice browseable web app. In addition to just viewing your messages, you can also search by date and/or query terms.
 
 Why?
 ----
@@ -56,8 +56,13 @@ Requirements are:
 
 Future TODO
 -----------
- - Messages.app style timestamps (supressed timestamps when messages are received within a given time delta)
- - Some way of searching your messages
- - Group chat isn't yet supported
+ - ~~Messages.app style timestamps (supressed timestamps when messages are received within a given time delta)~~
+ - ~~Some way of searching your messages~~
  - Update to Django 1.11
  - Add support attachments if it is a OSX database
+ - Add contact import support to associate numbers with canonical names
+ - Add support for group chats
+ - Convert message data to REST endpoints so UI doesn't hang when loading
+ - Make setup process user friendly in terms of uploading user db, uploading attachments directory, etc.
+ - Support multiple database selection
+ - Add exporting functionality
