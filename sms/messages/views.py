@@ -63,21 +63,22 @@ def messages(request, handle_id):
             return 1
 
     def valid_search(message):
-        message_text = message.text.upper()
-        for search_term in search_terms_cleaned:
-            if len(search_term) == 1:
-                if search_term[0] in message_text:
-                    return True
-            else:
-                found = True
-                for search_term_mul in search_term:
-                    if not found:
-                        break
-                    else:
-                        found = search_term_mul in message_text
-                if found:
-                    return True
-                return False
+        if message.text:
+            message_text = message.text.upper()
+            for search_term in search_terms_cleaned:
+                if len(search_term) == 1:
+                    if search_term[0] in message_text:
+                        return True
+                else:
+                    found = True
+                    for search_term_mul in search_term:
+                        if not found:
+                            break
+                        else:
+                            found = search_term_mul in message_text
+                    if found:
+                        return True
+        return False
 
     # process filters
     datestamps = []
