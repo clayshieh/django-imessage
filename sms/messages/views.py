@@ -119,13 +119,14 @@ def messages(request, handle_id):
             filtered_messages = messages
 
         # process datestamps
-        last = filtered_messages[0].date
-        datestamps.append(1)
-        for n, message in enumerate(filtered_messages):
-            message_date = message.date
-            if message_date.month != last.month or message_date.day != last.day or message_date.year != last.year:
-                datestamps.append(n + 1)
-                last = message.date
+        if filtered_messages:
+            last = filtered_messages[0].date
+            datestamps.append(1)
+            for n, message in enumerate(filtered_messages):
+                message_date = message.date
+                if message_date.month != last.month or message_date.day != last.day or message_date.year != last.year:
+                    datestamps.append(n + 1)
+                    last = message.date
 
     context = {
         "handle": handle,

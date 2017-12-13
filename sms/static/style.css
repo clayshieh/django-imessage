@@ -118,10 +118,10 @@ a.chat:after {
     font-size: 13px;
     text-shadow: 1px 0 1px #808080;
 }
-    a:hover:after, a:hover:after {
-        color: #fff;
-        text-shadow: 1px 0 1px #fff;
-    }
+a:hover:after, a:hover:after {
+    color: #fff;
+    text-shadow: 1px 0 1px #fff;
+}
 a#backButton:after {
     content: "〉";
     float: left;

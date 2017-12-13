@@ -31,7 +31,9 @@
     </div>
   </div>
   <hr>
-
+  <div>
+      <a>{{messages|length}} messages found</a>
+  </div>
   <blockquote class="chat">
     {% for message in messages %}
       {% if forloop.counter in datestamps %}
