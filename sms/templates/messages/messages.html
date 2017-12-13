@@ -3,12 +3,11 @@
 {% block scripts %}
   <script>
       function filterQuery() {
-          var date_input = document.getElementById("filter_date").value;
+          var start_input = document.getElementById("filter_start").value;
+          var end_input = document.getElementById("filter_end").value;
           var search_input = document.getElementById("filter_search").value;
-          window.location.replace("/messages/{{ handle.rowid }}/?filter=" + date_input + "&search=" + encodeURI(search_input));
-      }
-      function jumpToDay(day) {
-          alert(day);
+          window.location.replace("/messages/{{ handle.rowid }}/?start=" + start_input + "&end=" + end_input +
+              "&search=" + encodeURI(search_input));
       }
   </script>
 {% endblock %}
@@ -18,14 +17,14 @@
 {% block content %}
   <div id="header">
     <div>
-      <h1>Messages from {{ handle.id }}</h1>
-    </div>
-    <div>
       <a class="chat" href="/messages" id="backButton" style="max-width: 200px; float: left">Back</a>
+      <h1 style="text-align: center">Messages from {{ handle.id }}</h1>
     </div>
     <div id="filter" style="float: right">
-      <label for="filter_date">Show messages on day:</label>
-      <input id="filter_date" type="date">
+      <label for="filter_start">Start Date:</label>
+      <input id="filter_start" type="date">
+      <label for="filter_end">End Date:</label>
+      <input id="filter_end" type="date">
       <label for="filter_search">and/or search:</label>
       <input id="filter_search">
       <button onclick="filterQuery()">Go</button>
@@ -35,33 +34,32 @@
 
   <blockquote class="chat">
     {% for message in messages %}
-
-    {% if forloop.counter in datestamps %}
-      <p class="dateStamp">
-        {{message.date}}
-      </p>
-    {% endif %}
-
-    {% if message.is_from_me %}
-      {% if message.handle.service == "iMessage" %}
-        <p class="meBlue">
-      {% else %}
-        <p class="meGreen">
+      {% if forloop.counter in datestamps %}
+        <p class="dateStamp">
+          {{message.date}}
+        </p>
       {% endif %}
+
+      {% if message.is_from_me %}
+        {% if message.handle.service == "iMessage" %}
+          <p class="meBlue">
+        {% else %}
+          <p class="meGreen">
+        {% endif %}
+            {{ message.text }}
+          </p>
+      {% else %}
+        <p class="them">
           {{ message.text }}
         </p>
-    {% else %}
-      <p class="them">
-        {{ message.text }}
-      </p>
-    {% endif %}
-    {% if message.is_from_me %}
-      <p class="timestampMe">
-    {% else %}
-      <p class="timestampThem">
-    {% endif %}
-        {{ message.date }}
-      </p>
+      {% endif %}
+      {% if message.is_from_me %}
+        <p class="timestampMe">
+      {% else %}
+        <p class="timestampThem">
+      {% endif %}
+          {{ message.date }}
+        </p>
     {% endfor %}
   </blockquote>
 

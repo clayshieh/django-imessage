@@ -25,12 +25,14 @@ def messages(request, handle_id):
     end_date = None
     search_terms_cleaned = []
 
-    if "filter" in request.GET:
-        if request.GET["filter"]:
+    if "start" in request.GET:
+        if request.GET["start"]:
             app_tz = timezone(settings.TIME_ZONE)
-            start_date = datetime.strptime(request.GET["filter"], "%Y-%m-%d").replace(tzinfo=app_tz)
-            end_date = start_date + timedelta(days=1)
-
+            start_date = datetime.strptime(request.GET["start"], "%Y-%m-%d").replace(tzinfo=app_tz)
+    if "end" in request.GET:
+        if request.GET["end"]:
+            app_tz = timezone(settings.TIME_ZONE)
+            end_date = datetime.strptime(request.GET["end"], "%Y-%m-%d").replace(tzinfo=app_tz)
     if "search" in request.GET:
         print request.GET["search"]
         if request.GET["search"]:
@@ -55,9 +57,9 @@ def messages(request, handle_id):
 
     def valid_date(message):
         msg_date = message.date
-        if msg_date < start_date:
+        if start_date and msg_date < start_date:
             return 0
-        elif msg_date > end_date:
+        if end_date and msg_date > end_date:
             return -1
         else:
             return 1
@@ -84,10 +86,10 @@ def messages(request, handle_id):
     datestamps = []
     filtered_messages = []
     if messages:
-        if (start_date and end_date) or search_terms_cleaned:
+        if start_date or end_date or search_terms_cleaned:
             for message in messages:
                 # date only
-                if (start_date and end_date) and not search_terms_cleaned:
+                if (start_date or end_date) and not search_terms_cleaned:
                     ret = valid_date(message)
                     if ret == 0:
                         continue
@@ -97,7 +99,7 @@ def messages(request, handle_id):
                         filtered_messages.append(message)
 
                 # search only
-                elif search_terms_cleaned and not (start_date and end_date):
+                elif search_terms_cleaned and not (start_date or end_date):
                     ret = valid_search(message)
                     if ret:
                         filtered_messages.append(message)
