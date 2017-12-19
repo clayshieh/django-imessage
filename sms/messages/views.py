@@ -20,6 +20,10 @@ def messages(request, handle_id):
 
     handle = Handle.objects.get(pk=handle_id)
 
+    # filter display
+    start = None
+    end = None
+    search = None
     # filtering functions
     start_date = None
     end_date = None
@@ -27,15 +31,17 @@ def messages(request, handle_id):
 
     if "start" in request.GET:
         if request.GET["start"]:
+            start = request.GET["start"]
             app_tz = timezone(settings.TIME_ZONE)
             start_date = datetime.strptime(request.GET["start"], "%Y-%m-%d").replace(tzinfo=app_tz)
     if "end" in request.GET:
         if request.GET["end"]:
+            end = request.GET["end"]
             app_tz = timezone(settings.TIME_ZONE)
             end_date = datetime.strptime(request.GET["end"], "%Y-%m-%d").replace(tzinfo=app_tz)
     if "search" in request.GET:
-        print request.GET["search"]
         if request.GET["search"]:
+            search = request.GET["search"]
             query = request.GET["search"].upper()
             if query:
                 search_terms = []
@@ -131,7 +137,10 @@ def messages(request, handle_id):
     context = {
         "handle": handle,
         "messages": filtered_messages,
-        "datestamps": datestamps
+        "datestamps": datestamps,
+        "start": start,
+        "end": end,
+        "search": search
     }
 
     return render(request, "messages/messages.html", context)

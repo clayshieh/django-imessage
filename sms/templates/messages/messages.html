@@ -22,11 +22,11 @@
     </div>
     <div id="filter" style="float: right">
       <label for="filter_start">Start Date:</label>
-      <input id="filter_start" type="date">
+      <input id="filter_start" type="date" {% if start %} value={{start}} {% endif %}>
       <label for="filter_end">End Date:</label>
-      <input id="filter_end" type="date">
+      <input id="filter_end" type="date" {% if end %} value={{end}} {% endif %}>
       <label for="filter_search">and/or search:</label>
-      <input id="filter_search">
+      <input id="filter_search" {% if search %} value={{search}} {% endif %}>
       <button onclick="filterQuery()">Go</button>
     </div>
   </div>
