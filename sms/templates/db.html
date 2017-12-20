@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Databases{% endblock %}
+{% block scripts %}
+
+{% endblock %}
+{% block content %}
+<div id="header">
+  <h1>Databases</h1>
+</div>
+{% if changed %}
+    <h3>Selected database changed to: {{selected}}</h3>
+    <p>
+        Please shutdown the localweb server, run python manage.py syncdb and then run python manage.py runserver to see changes.
+    </p>
+{% else %}
+    <h3>Currently selected database: {{selected}}</h3>
+
+    <div>
+      <a>{{databases|length}} databases found</a>
+    </div>
+
+    <ul>
+      {% for database in databases %}
+      <li><a class="chat" href="/databases/?select={{database}}">{{ database }}</a></li>
+      {% endfor %}
+    </ul>
+{% endif %}
+
+{% endblock %}

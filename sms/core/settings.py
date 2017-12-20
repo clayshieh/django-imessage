@@ -16,7 +16,7 @@ ADMINS = (
 MANAGERS = ADMINS
 
 DATABASE_ENGINE = 'sqlite3'
-DATABASE_NAME = open(join(join(PROJECT_ROOT, 'db'), "db.conf")).read().strip()
+DATABASE_NAME = open(join(join(PROJECT_ROOT, 'db'), "db.conf"), "r").read().strip()
 DATABASE_PATH = join(join(PROJECT_ROOT, 'db'), DATABASE_NAME)
 DATABASES = {
     'default': {
