@@ -23,6 +23,8 @@ def databases(request):
             open(join(join(settings.PROJECT_ROOT, 'db'), "db.conf"), "w").write(select)
             selected_db = select
             changed = True
+            # from django.core.management import execute_from_command_line
+            # execute_from_command_line("syncdb")
 
     context = {
         "databases": dbs,
