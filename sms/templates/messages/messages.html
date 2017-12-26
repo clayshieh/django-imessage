@@ -9,6 +9,17 @@
           window.location.replace("/messages/{{ handle.rowid }}/?start=" + start_input + "&end=" + end_input +
               "&search=" + encodeURI(search_input));
       }
+      function exportData() {
+          var export_type = "json";
+          if (window.location.href.includes("start") || window.location.href.includes("end") || window.location.href.includes("search")) {
+              window.location.replace(window.location + "&export=" + export_type);
+          } else {
+              window.location.replace(window.location + "?export=" + export_type);
+          }
+      }
+      function clearQueries() {
+          window.location.replace("/messages/{{ handle.rowid }}/");
+      }
   </script>
 {% endblock %}
 
@@ -20,7 +31,7 @@
       <a class="chat" href="/messages" id="backButton" style="max-width: 200px; float: left">Back</a>
       <h1 style="text-align: center">Messages from {{ handle.id }}</h1>
     </div>
-    <div id="filter" style="float: right">
+    <div id="actionBar" style="float: right">
       <label for="filter_start">Start Date:</label>
       <input id="filter_start" type="date" {% if start %} value="{{start}}" {% endif %}>
       <label for="filter_end">End Date:</label>
@@ -28,6 +39,8 @@
       <label for="filter_search">and/or search:</label>
       <input id="filter_search" {% if search %} value="{{search}}" {% endif %}>
       <button onclick="filterQuery()">Go</button>
+      <button onclick="clearQueries()">Clear</button>
+      <button onclick="exportData()">Export</button>
     </div>
   </div>
   <hr>

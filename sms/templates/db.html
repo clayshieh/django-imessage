@@ -13,7 +13,14 @@
         Please shutdown the localweb server, run python manage.py syncdb and then run python manage.py runserver to see changes.
     </p>
 {% else %}
-    <h3>Currently selected database: {{selected}}</h3>
+{% if different %}
+    <h3>Database in config file is different from database in settings file.</h3>
+    <blockquote>
+        Either select a different database or shutdown the localweb server, run python manage.py syncdb and then run python manage.py runserver to see changes.
+    </blockquote>
+{% endif %}
+    <h3>Currently loaded database: {{selected}}</h3>
+    <h3>Database in config file: {{config_db}}</h3>
 
     <div>
       <a>{{databases|length}} databases found</a>

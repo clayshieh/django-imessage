@@ -139,7 +139,7 @@ a:hover:after, a:hover:after {
 #header {
   overflow: auto;
 }
-#filter {
+#actionBar {
   padding-top: 9px;
 }
 label {
