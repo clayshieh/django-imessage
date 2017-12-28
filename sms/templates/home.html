@@ -14,9 +14,18 @@
         Welcome to Django iMessages
     </h1>
     <h2>Usage</h2>
-    <h4>Index</h4>
+    <h4>Databases Index</h4>
     <p>
-        The index page lists all conversations found in the database SMS and iMessage alike. Click on the phone number/handle
+        The databases index page lists all databases found in the db/ folder that end with *.db. You can put multiple
+        iMessage database files in there and select the one you want to view. There is no need to restart the server
+        when you change which database is being read.
+    </p>
+    <p>
+        To see all databases in the directory go here: <a href="/databases"> HERE</a>
+    </p>
+    <h4>Messages Index</h4>
+    <p>
+        The messages index page lists all conversations found in the database SMS and iMessage alike. Click on the phone number/handle
         that you wish to view the conversations for.
     </p>
     <p>
@@ -77,11 +86,17 @@
     <p>
         https://localhost:8000/messages/1/?search=term1%20AND%20term2
     </p>
+    <u>Export Data</u>
     <p>
-        Note:
+        You can also export data by clicking on the "Export" button on the top right of this page. The export function
+        will export the messages in various formats with the currently specified filters if any.
+    </p>
+    <p>
+        <b>Note:</b>
     </p>
     <ul>
         <li>Search expects a whitespace before and after the AND and OR operators</li>
+        <li>AND and OR should not be used in search query terms themselves</li>
         <li>Search terms AND and OR can be combined</li>
         <li>OR takes precedence over AND meaning x OR y AND z is interpreted as x OR (y AND z)</li>
         <li>Case does not matter in search terms</li>
