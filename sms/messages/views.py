@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.shortcuts import render
+from django.http import HttpResponse
 
 from messages.models import Message, Handle
 
@@ -8,16 +9,13 @@ from pytz import timezone
 
 
 def index(request):
-
     context = {
         "handles": Handle.objects.all()
     }
-
     return render(request, "messages/index.html", context)
 
 
 def messages(request, handle_id):
-
     handle = Handle.objects.get(pk=handle_id)
 
     # filter display
@@ -29,35 +27,32 @@ def messages(request, handle_id):
     end_date = None
     search_terms_cleaned = []
 
-    if "start" in request.GET:
-        if request.GET["start"]:
-            start = request.GET["start"]
-            app_tz = timezone(settings.TIME_ZONE)
-            start_date = datetime.strptime(request.GET["start"], "%Y-%m-%d").replace(tzinfo=app_tz)
-    if "end" in request.GET:
-        if request.GET["end"]:
-            end = request.GET["end"]
-            app_tz = timezone(settings.TIME_ZONE)
-            end_date = datetime.strptime(request.GET["end"], "%Y-%m-%d").replace(tzinfo=app_tz)
-    if "search" in request.GET:
-        if request.GET["search"]:
-            search = request.GET["search"]
-            query = request.GET["search"].upper()
-            if query:
-                search_terms = []
-                if " OR " in query:
-                    for q in query.split(" OR "):
-                        search_terms.append([q.strip()])
+    if "start" in request.GET and request.GET["start"]:
+        start = request.GET["start"]
+        app_tz = timezone(settings.TIME_ZONE)
+        start_date = datetime.strptime(request.GET["start"], "%Y-%m-%d").replace(tzinfo=app_tz)
+    if "end" in request.GET and request.GET["end"]:
+        end = request.GET["end"]
+        app_tz = timezone(settings.TIME_ZONE)
+        end_date = datetime.strptime(request.GET["end"], "%Y-%m-%d").replace(tzinfo=app_tz)
+    if "search" in request.GET and request.GET["search"]:
+        search = request.GET["search"]
+        query = request.GET["search"].upper()
+        if query:
+            search_terms = []
+            if " OR " in query:
+                for q in query.split(" OR "):
+                    search_terms.append([q.strip()])
+            else:
+                search_terms.append([query])
+            for search_term in search_terms:
+                tmp = []
+                if " AND " in search_term[0]:
+                    for x in search_term[0].split(" AND "):
+                        tmp.append(x.strip())
                 else:
-                    search_terms.append([query])
-                for search_term in search_terms:
-                    tmp = []
-                    if " AND " in search_term[0]:
-                        for x in search_term[0].split(" AND "):
-                            tmp.append(x.strip())
-                    else:
-                        tmp = search_term
-                    search_terms_cleaned.append(tmp)
+                    tmp = search_term
+                search_terms_cleaned.append(tmp)
 
     messages = handle.message_set.all()
 
@@ -134,13 +129,46 @@ def messages(request, handle_id):
                     datestamps.append(n + 1)
                     last = message.date
 
+    # process exporting data
+    def csv_format():
+        ret = ""
+        for message in filtered_messages:
+            ret += ",".join([str(message.text), str(message.date), str(message.service), str(message.is_from_me)]) + "\n"
+        return ret
+
+    def json_format():
+        ret = []
+        for message in filtered_messages:
+            tmp = {}
+            tmp["text"] = message.text
+            tmp["date"] = message.date
+            tmp["service"] = message.service
+            tmp["is_from_me"] = message.is_from_me
+            ret.append(tmp)
+        return str(ret)
+
+    export_formats = {
+        "CSV": csv_format,
+        "JSON": json_format
+    }
+
+    if "export" in request.GET and request.GET["export"]:
+        ret = None
+        export_type = request.GET["export"]
+        if export_type.upper() in export_formats:
+            ret = export_formats[export_type]()
+        else:
+            ret = "Invalid export format."
+        return HttpResponse(ret)
+
     context = {
         "handle": handle,
         "messages": filtered_messages,
         "datestamps": datestamps,
         "start": start,
         "end": end,
-        "search": search
+        "search": search,
+        "export_formats": export_formats.keys()
     }
 
     return render(request, "messages/messages.html", context)

@@ -1,7 +1,6 @@
 # Django settings for sms project.
 import os
 from os.path import join
-import django
 
 PROJECT_ROOT = os.path.dirname(os.path.realpath(__file__)) + '/..'
 CORE_APP_ROOT = os.path.dirname(os.path.realpath(__file__))
