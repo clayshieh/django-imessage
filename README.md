@@ -6,9 +6,9 @@ The readme below is a modified version of jsok's to reflect the changes I've mad
 
 What?
 -----
-iOS and OSX store all your SMS/Messages in a sqlite database. This gets downloaded to your computer each time you backup/sync your phone via iTunes.
+iOS and OSX store all your iMessages/SMS texts in a sqlite database. This gets downloaded to your computer each time you backup/sync your phone via iTunes.
 
-This is a django app which allows you to drop your SMS database into it, fire it up and have all your messages in a nice browseable web app. In addition to just viewing your messages, you can also search by date and/or query terms.
+This is a django app which allows you to drop your iMessage/SMS database(s) into it, fire it up and have all your messages and databases in a nice browseable web app. In addition to just viewing your messages, you can also filter by date and/or query search terms.
 
 Why?
 ----
@@ -16,7 +16,7 @@ Why not? iOS and OSX will only show the most recent 100 or so messages on the sc
 
 How?
 ----
-The SMS database has been analysed by many and its schema is well known. I've taken some of this info and used it to convince django's ORM into reading it.
+The iMessage/SMS database has been analysed by many and its schema is well known. I've taken some of this info and used it to convince django's ORM into reading it.
 
 **For iOS:**
 
@@ -48,11 +48,11 @@ Requirements are:
  - django 1.4
  - pytz (for timezone info)
 
-1. edit `core/settings.py` and set your TIME_ZONE.
-2. Then drop your SMS database in `sms/db/` and name the db file `sms.db`.
-3. run `manage.py syncdb`
-4. `manage.py runserver`
-6. Navigate to `http://localhost:8000/`, where you can view the instructions of how to use the tool.
+1. edit `core/settings.py` and set your TIME_ZONE (list of timezones [here](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones))
+2. Then drop your iMessage/SMS database(s) in `sms/db/` (app is configured to use file named sms.db by default, you can select which db you want to use in `http://localhost:8000/databases`)
+3. run `python manage.py syncdb`
+4. run `python manage.py runserver`
+5. Navigate to `http://localhost:8000/`, where you can view the instructions of how to use the tool
 
 Future TODO
 -----------
@@ -64,5 +64,5 @@ Future TODO
  - Add support for group chats
  - Convert message data to REST endpoints so UI doesn't hang when loading
  - Make setup process user friendly in terms of uploading user db, uploading attachments directory, etc.
- - Support multiple database selection
- - Add exporting functionality
+ - ~~Support multiple database selection~~
+ - ~~Add exporting functionality~~
