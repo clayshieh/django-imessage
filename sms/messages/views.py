@@ -145,19 +145,21 @@ def messages(request, handle_id):
             tmp["service"] = message.service
             tmp["is_from_me"] = message.is_from_me
             ret.append(tmp)
-        return ret
+        return str(ret)
+
+    export_formats = {
+        "CSV": csv_format,
+        "JSON": json_format
+    }
 
     if "export" in request.GET and request.GET["export"]:
         ret = None
         export_type = request.GET["export"]
-        if export_type == "csv":
-            ret = csv_format()
-            return HttpResponse(ret)
-        elif export_type == "json":
-            ret = json_format()
-            return HttpResponse(str(ret))
+        if export_type.upper() in export_formats:
+            ret = export_formats[export_type]()
         else:
-            return HttpResponse("Invalid export.")
+            ret = "Invalid export format."
+        return HttpResponse(ret)
 
     context = {
         "handle": handle,
@@ -165,7 +167,8 @@ def messages(request, handle_id):
         "datestamps": datestamps,
         "start": start,
         "end": end,
-        "search": search
+        "search": search,
+        "export_formats": export_formats.keys()
     }
 
     return render(request, "messages/messages.html", context)

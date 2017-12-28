@@ -9,12 +9,15 @@
           window.location.replace("/messages/{{ handle.rowid }}/?start=" + start_input + "&end=" + end_input +
               "&search=" + encodeURI(search_input));
       }
-      function exportData() {
-          var export_type = "json";
+      function chooseExport() {
+          var modal = document.getElementById("myModal");
+          modal.style.display = "block";
+      }
+      function exportData(format) {
           if (window.location.href.includes("start") || window.location.href.includes("end") || window.location.href.includes("search")) {
-              window.location.replace(window.location + "&export=" + export_type);
+              window.location.replace(window.location + "&export=" + format);
           } else {
-              window.location.replace(window.location + "?export=" + export_type);
+              window.location.replace(window.location + "?export=" + format);
           }
       }
       function clearQueries() {
@@ -26,6 +29,17 @@
 {% block body_id %}chat{% endblock %}
 
 {% block content %}
+  <div id="myModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h3>Export as...</h3>
+      {% for export_format in export_formats %}
+      <button onclick="exportData('{{export_format}}')">{{export_format}}</button>
+      {% endfor %}
+    </div>
+  </div>
+
   <div id="header">
     <div>
       <a class="chat" href="/messages" id="backButton" style="max-width: 200px; float: left">Back</a>
@@ -40,14 +54,15 @@
       <input id="filter_search" {% if search %} value="{{search}}" {% endif %}>
       <button onclick="filterQuery()">Go</button>
       <button onclick="clearQueries()">Clear</button>
-      <button onclick="exportData()">Export</button>
+      <button onclick="chooseExport()">Export</button>
     </div>
   </div>
   <hr>
-  <div>
+  <div id="messageCounter">
     <a>{{messages|length}} messages found</a>
   </div>
-  <blockquote class="chat">
+  <div id="messages">
+    <blockquote class="chat">
     {% for message in messages %}
       {% if forloop.counter in datestamps %}
         <p class="dateStamp">
@@ -77,7 +92,6 @@
         </p>
     {% endfor %}
   </blockquote>
-
-
+  </div>
 {% endblock %}
 

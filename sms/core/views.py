@@ -21,7 +21,7 @@ def databases(request):
 
     if "select" in request.GET and request.GET["select"]:
         select = request.GET["select"].strip()
-        if select != selected_db:
+        if select != config_db:
             open(join(join(settings.PROJECT_ROOT, 'db'), "db.conf"), "w").write(select)
             selected_db = select
             changed = True
