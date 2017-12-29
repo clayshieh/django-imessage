@@ -46,13 +46,14 @@ Setup
 -----
 Requirements are:
  - django 1.4
- - pytz (for timezone info)
+ - pytz
 
 1. edit `core/settings.py` and set your TIME_ZONE (list of timezones [here](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones))
-2. Then drop your iMessage/SMS database(s) in `sms/db/` (app is configured to use file named sms.db by default, you can select which db you want to use in `http://localhost:8000/databases`)
-3. run `python manage.py syncdb`
-4. run `python manage.py runserver`
-5. Navigate to `http://localhost:8000/`, where you can view the instructions of how to use the tool
+2. Then drop your iMessage/SMS database(s) in `sms/db/`
+3. run `python manage.py runserver`
+4. Navigate to `http://localhost:8000/databases/` and select the database you wish to view
+
+Navigate to `http://localhost:8000` for instructions in general
 
 Future TODO
 -----------
