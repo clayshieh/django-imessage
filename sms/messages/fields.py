@@ -29,10 +29,15 @@ class IMessageTimeStampField(models.DateTimeField):
 
 	def to_python(self, value):
 		super(IMessageTimeStampField, self)
+
 		try:
 			app_tz = timezone(settings.TIME_ZONE)
 			return datetime.fromtimestamp(value+self.IMESSAGE_DELTA).replace(tzinfo=app_tz)
-		except:
+		except ValueError:
+			# to handle new version of databases (OSX 10.13)
+			app_tz = timezone(settings.TIME_ZONE)
+			return datetime.fromtimestamp(value/1000000000 + self.IMESSAGE_DELTA).replace(tzinfo=app_tz)
+		except Exception:
 			return value
 
 
