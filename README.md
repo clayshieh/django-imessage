@@ -23,20 +23,20 @@ The iMessage/SMS database has been analysed by many and its schema is well known
 If you have a jailbroken device:
 
 * SSH into your device
-* Navigate to `~/Library/Messages/`
+* Navigate to `/var/mobile/Library/SMS/`
 * scp sms.db to your computer
 
 If you do not have a jailbroken device or you do not want to use ssh:
 
 * Backup your iphone locally on your computer
 * Navigate to `~/Library/Application Support/Mobile Sync/Backup/<device id>/3d0d7e5fb2ce288813306e4d4636395e047a3d28`
-* Copy that somewhere and rename it to sms.db
+* Copy the db file somewhere
 
 **For OSX**
 
 * Open terminal.app
 * Navigate to `~/Library/Messages/`
-* Copy that somewhere and rename it to sms.db
+* Copy chat.db somewhere
 
 Screenshot
 ----------
