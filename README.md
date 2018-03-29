@@ -23,7 +23,7 @@ The iMessage/SMS database has been analysed by many and its schema is well known
 If you have a jailbroken device:
 
 * SSH into your device
-* Navigate to `~/Library/SMS/`
+* Navigate to `~/Library/Messages/`
 * scp sms.db to your computer
 
 If you do not have a jailbroken device or you do not want to use ssh:
