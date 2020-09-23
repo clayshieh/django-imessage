@@ -38,6 +38,12 @@ If you do not have a jailbroken device or you do not want to use ssh:
 * Navigate to `~/Library/Messages/`
 * Copy chat.db somewhere
 
+As of OSX 10.15 and with iCloud message sync on it seems like users cannot access the `~/Library/Messages/` directory (I cannot confirm when or what caused this) so do the following steps instead:
+
+1. Open terminal.app
+2. `open ~/Library/Messages/`
+3. Copy `chat.db` to the cloned github directory
+
 Screenshot
 ----------
 ![Screenshot](https://raw.github.com/clayshieh/django-imessage/master/messages_screenshot.png)
@@ -54,6 +60,21 @@ Requirements are:
 4. Navigate to `http://localhost:8000/databases/` and select the database you wish to view
 
 Navigate to `http://localhost:8000` for instructions in general
+
+Docker Setup
+------------
+1. [Install Docker](https://docs.docker.com/get-docker/)
+2. Run the container with the following command:
+`docker run -it -p 8000:8000 -v <path to chat.db or sms.db>:/sms/db/sms.db clayshieh/django-imessage:latest`
+3. Navigate to `http://localhost:8000`
+
+Updates
+-------
+9/22/2020
+
+ - Dockerized the app and updated instructions for OSX
+ - I have not worked on or updated this app in quite a while. There have been a lot of changes in both iOS and OSX so if you have any issues while using the app please let me know
+ - I did not realize that issues cannot be opened on forked repos, I will be moving all the code to a new repo and leaving this repo as a pointer once I either get permission from [jsok](https://github.com/jsok) and refactor the code
 
 Future TODO
 -----------
